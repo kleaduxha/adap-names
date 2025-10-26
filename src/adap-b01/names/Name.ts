@@ -49,24 +49,24 @@ export class Name {
     return this.components[i];
   }
 
-    /** Expects that new Name component c is properly masked */
+  /** Expects that new Name component c is properly masked */
   public setComponent(i: number, c: string): void {
     if (i < 0 || i >= this.components.length) return;
     this.components[i] = c;
   }
 
-     /** Returns number of components in Name instance */
+  /** Returns number of components in Name instance */
   public getNoComponents(): number {
     return this.components.length;
   }
 
-    /** Expects that new Name component c is properly masked */
+  /** Expects that new Name component c is properly masked */
   public insert(i: number, c: string): void {
     const idx = Math.max(0, Math.min(i, this.components.length));
     this.components.splice(idx, 0, c);
   }
 
-    /** Expects that new Name component c is properly masked */
+  /** Expects that new Name component c is properly masked */
   public append(c: string): void {
     this.components.push(c);
   }
