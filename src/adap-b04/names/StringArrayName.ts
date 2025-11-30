@@ -1,4 +1,4 @@
-import { DEFAULT_DELIMITER, ESCAPE_CHARACTER } from "../common/Printable";
+import { DEFAULT_DELIMITER } from "../common/Printable";
 import { Name } from "./Name";
 import { AbstractName } from "./AbstractName";
 
@@ -6,64 +6,30 @@ export class StringArrayName extends AbstractName {
 
     protected components: string[] = [];
 
-    constructor(source: string[], delimiter?: string) {
-        super();
-        throw new Error("needs implementation or deletion");
+    constructor(source: string[], delimiter: string = DEFAULT_DELIMITER) {
+        super(delimiter);
+        this.components = Array.isArray(source) ? [...source] : [];
+        this.assertClassInvariant();
     }
 
     public clone(): Name {
-        throw new Error("needs implementation or deletion");
+        // Clone must produce an equal but independent object
+        const copy = new StringArrayName(this.components, this.delimiter);
+        // Postcondition (weak): cloned object is equal
+        if (!this.isEqual(copy)) {
+            throw new Error("clone failed to create equal StringArrayName");
+        }
+        return copy;
     }
 
-    public asString(delimiter: string = this.delimiter): string {
-        throw new Error("needs implementation or deletion");
+    // Representation hooks for AbstractName
+
+    protected getComponentsInternal(): string[] {
+        return [...this.components];
     }
 
-    public asDataString(): string {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public isEqual(other: Name): boolean {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public getHashCode(): number {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public isEmpty(): boolean {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public getDelimiterCharacter(): string {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public getNoComponents(): number {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public getComponent(i: number): string {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public setComponent(i: number, c: string) {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public insert(i: number, c: string) {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public append(c: string) {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public remove(i: number) {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public concat(other: Name): void {
-        throw new Error("needs implementation or deletion");
+    protected setComponentsInternal(components: string[]): void {
+        this.components = [...components];
+        this.assertClassInvariant();
     }
 }
