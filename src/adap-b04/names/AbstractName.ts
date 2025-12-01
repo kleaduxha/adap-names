@@ -9,7 +9,6 @@ export abstract class AbstractName implements Name {
 
     constructor(delimiter: string = DEFAULT_DELIMITER) {
         this.delimiter = this.normalizeDelimiter(delimiter);
-        this.assertClassInvariant();
     }
 
     public abstract clone(): Name;
